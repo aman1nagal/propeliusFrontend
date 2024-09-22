@@ -56,7 +56,6 @@ const PlaylistDetail = () => {
       </div>
       <div className="flex flex-col justify-between w-full gap-y-6">
         {currentData?.[0]?.songs?.map((item, index) => {
-          console.log(item, "fedvsdvsdvsdvdv");
           return (
             <SongsRow
               key={index}

@@ -11,7 +11,6 @@ export const apiSlice = createApi({
         const user = JSON.parse(localStorage.getItem("user"));
         token = user?.token;
       }
-      console.log(token, "toekn");
       headers.set("authorization", `Bearer ${token && token}`);
       return headers;
     },
@@ -24,7 +23,7 @@ export const apiSlice = createApi({
     "DeletePlaylist",
     "AddSongsToPlaylist",
     "DeleteSongsToPlaylist",
-    "GetSongs"
+    "GetSongs",
   ],
   endpoints: (builder) => ({}),
 });

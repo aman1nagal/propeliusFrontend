@@ -12,8 +12,6 @@ const SongsRow = ({
   key,
   refetch,
 }) => {
-  console.log(item, "xvsdvdvdfvdfvdfvdfv");
-
   const selectedItem = item?._id == selected;
   const { minutes, remainingSeconds } = convertSecondsToMinutes(item?.duration);
   const [

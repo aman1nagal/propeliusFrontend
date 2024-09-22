@@ -21,8 +21,6 @@ const modalStyle = {
 };
 
 const AddPlaylist = ({ handleClose, open, data = null, refetch }) => {
-  console.log(data?._id, "data");
-
   const [addNewPlaylist, { isLoading: isAdding, error: addError }] =
     useAddPlaylistMutation();
   const [
@@ -36,7 +34,6 @@ const AddPlaylist = ({ handleClose, open, data = null, refetch }) => {
   });
 
   const handleSubmit = async (values) => {
-    console.log(values);
     if (data == null) {
       await addNewPlaylist({
         name: values.name,

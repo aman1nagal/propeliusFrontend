@@ -2,14 +2,12 @@ import React from "react";
 import { Formik, Form, Field } from "formik";
 import { TextField, Button, Snackbar } from "@mui/material";
 import * as Yup from "yup";
-import Image from "next/image";
 import { useLoginMutation } from "../redux/slices/rtkSlices/authSlice";
 import { useDispatch } from "react-redux";
 import { loginSlice } from "../redux/slices/stateSlices/authSlice";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import Loader from "../components/Loader";
-import LoginSvg from "../components/LoginSvg";
 
 const validationSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email").required("Email is required"),
@@ -65,11 +63,6 @@ const SignIn = () => {
   };
   return (
     <div className="bg-blue-50 min-h-screen w-full md:px-8 h-full flex items-center justify-evenly">
-      {/* <div className="w-full lg:w-1/2 hidden md:block justify-center  lg:mb-0">
-        <LoginSvg />
-      </div> */}
-      {/* <div className="flex flex-col lg:flex-row items-end justify-end  h-full"> */}
-      {/* <div className="absolute z-10 inset-0 flex items-center justify-center p-4 md:p-0"> */}
       <div className="absolute z-10 inset-0 flex items-center justify-center p-4 md:p-0">
         <div className="max-w-md w-full p-6 md:p-8 rounded-3xl shadow-wrapShadow bg-white">
           <div className="flex">
@@ -157,15 +150,12 @@ const SignIn = () => {
           </Formik>
         </div>
       </div>
-
-      {/* </div> */}
-      {/* </div> */}
       <Snackbar
         anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
         open={open}
         onClose={() => setOpen(false)}
         message={error?.data?.message}
-        autoHideDuration={3000} // Automatically close after 3 seconds
+        autoHideDuration={3000}
       />
     </div>
   );

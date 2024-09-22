@@ -13,7 +13,6 @@ import { useRegisterMutation } from "../redux/slices/rtkSlices/authSlice";
 import Link from "next/link";
 import { Router, useRouter } from "next/router";
 import Loader from "../components/Loader";
-import { RegistraionSVG } from "../components/RegistraionSVG";
 
 const validationSchema = Yup.object().shape({
   name: Yup.string().required("Name is required"),

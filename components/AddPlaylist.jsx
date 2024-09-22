@@ -1,14 +1,13 @@
 import { Box, Button, Modal, TextField, Typography } from "@mui/material";
-import { ErrorMessage, Field, Form, Formik } from "formik";
+import { Field, Form, Formik } from "formik";
 import * as Yup from "yup";
-import { useLoginMutation } from "../redux/slices/rtkSlices/authSlice";
 import {
   useAddPlaylistMutation,
   useUpdatePlaylistMutation,
 } from "../redux/slices/rtkSlices/playlistSlice";
-import Loader from "../components/Loader"
+import Loader from "../components/Loader";
 
-const style = {
+const modalStyle = {
   position: "absolute",
   top: "50%",
   left: "50%",
@@ -17,16 +16,21 @@ const style = {
   bgcolor: "white",
   border: "2px solid #000",
   boxShadow: 24,
-  BorderRadius: "20px",
+  borderRadius: "20px",
   p: 4,
 };
 
 const AddPlaylist = ({ handleClose, open, data = null, refetch }) => {
-  console.log(data?._id, "data")
-  const [addPlaylist, { isLoading, error }] = useAddPlaylistMutation();
-  const [updatePlaylist, { isLoading: pdateLoading, error: updateError }] =
-    useUpdatePlaylistMutation();
-  const validationSchema = Yup.object().shape({
+  console.log(data?._id, "data");
+
+  const [addNewPlaylist, { isLoading: isAdding, error: addError }] =
+    useAddPlaylistMutation();
+  const [
+    updateExistingPlaylist,
+    { isLoading: isUpdating, error: updateError },
+  ] = useUpdatePlaylistMutation();
+
+  const playlistValidationSchema = Yup.object().shape({
     name: Yup.string().required("Name is required"),
     description: Yup.string().required("Description is required"),
   });
@@ -34,12 +38,12 @@ const AddPlaylist = ({ handleClose, open, data = null, refetch }) => {
   const handleSubmit = async (values) => {
     console.log(values);
     if (data == null) {
-      await addPlaylist({
+      await addNewPlaylist({
         name: values.name,
         description: values.description,
       }).unwrap();
     } else {
-      await updatePlaylist({
+      await updateExistingPlaylist({
         id: data?._id,
         body: { name: values.name, description: values.description },
       }).unwrap();
@@ -49,8 +53,12 @@ const AddPlaylist = ({ handleClose, open, data = null, refetch }) => {
   };
 
   return (
-    <Modal open={open} onClose={handleClose} sx={{ borderRadius: "10px", width:"100% !important" }}>
-      <Box sx={style}>
+    <Modal
+      open={open}
+      onClose={handleClose}
+      sx={{ borderRadius: "10px", width: "100% !important" }}
+    >
+      <Box sx={modalStyle}>
         <Typography
           id="modal-title"
           variant="h6"
@@ -64,7 +72,7 @@ const AddPlaylist = ({ handleClose, open, data = null, refetch }) => {
             name: data?.name || "",
             description: data?.description || "",
           }}
-          validationSchema={validationSchema}
+          validationSchema={playlistValidationSchema}
           onSubmit={handleSubmit}
         >
           {({ handleChange, handleBlur, values, errors, touched }) => (
@@ -108,8 +116,13 @@ const AddPlaylist = ({ handleClose, open, data = null, refetch }) => {
                     padding: "10px 20px",
                   }}
                 >
-                  
-                  {isLoading || pdateLoading ? <Loader size={20} color="white" /> : data == null ? "Add Playlist" : "Edit Playlist"} 
+                  {isAdding || isUpdating ? (
+                    <Loader size={20} color="white" />
+                  ) : data == null ? (
+                    "Add Playlist"
+                  ) : (
+                    "Edit Playlist"
+                  )}
                 </Button>
               </div>
             </Form>

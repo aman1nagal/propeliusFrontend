@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import PlaylistCard from "../components/PlaylistCard";
-import SearchBar from "../components/SrachBar";
+import SearchBar from "../components/SearchBar";
 import Image from "next/image";
 import { Button } from "@mui/material";
 import AddPlaylist from "../components/AddPlaylist";

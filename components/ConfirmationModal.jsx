@@ -1,6 +1,6 @@
 import React from "react";
 import { Modal, Box, Typography, Button } from "@mui/material";
-import Loader from "../components/Loader"
+import Loader from "../components/Loader";
 const ConfirmationModal = ({ open, onClose, onConfirm, message, loading }) => {
   return (
     <Modal open={open} onClose={onClose}>
@@ -14,14 +14,14 @@ const ConfirmationModal = ({ open, onClose, onConfirm, message, loading }) => {
           boxShadow: 50,
           p: 4,
           borderRadius: 2,
-          width:"30%"
+          width: "30%",
         }}
       >
         <Typography variant="h6" component="h2" className="font-semibold">
           Are you sure?
         </Typography>
         <Typography sx={{ mt: 2 }}>{message || ""}</Typography>
-       
+
         <div className="flex justify-center mt-5 gap-10">
           <Button
             type="button"
@@ -33,7 +33,7 @@ const ConfirmationModal = ({ open, onClose, onConfirm, message, loading }) => {
               padding: "10px 20px",
             }}
           >
-            {loading ? "Confirm" : <Loader />}
+            {!loading ? "Confirm" : <Loader />}
           </Button>
           <Button
             type="button"
@@ -48,7 +48,7 @@ const ConfirmationModal = ({ open, onClose, onConfirm, message, loading }) => {
             Cancel
           </Button>
         </div>
-       
+
         {/* </Box> */}
       </Box>
     </Modal>

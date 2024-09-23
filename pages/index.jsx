@@ -105,18 +105,18 @@ const Home = () => {
             <PlaylistCard
               key={index}
               item={item}
-              setSelected={() => {
+              setSelectedPlaylist={() => {
                 setCurrentSelection(item?._id);
                 router.push({
                   pathname: `/${item?.name}`,
                   query: { id: item?._id },
                 });
               }}
-              setEditData={() => {
+              handleEdit={() => {
                 setEditPlaylistData(item);
                 handleOpenAddModal();
               }}
-              setDeleteData={() => {
+              handleDelete={() => {
                 setDeletePlaylistId(item?._id);
                 setDeleteModalOpen(true);
               }}
@@ -142,7 +142,7 @@ const Home = () => {
         onClose={() => setDeleteModalOpen(false)}
         onConfirm={handleConfirmDelete}
         refetch={refetch}
-        loading={deletePlaylist}
+        loading={isLoadingDelete}
       />
     </div>
   );

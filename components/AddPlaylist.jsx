@@ -105,8 +105,9 @@ const AddPlaylist = ({ handleClose, open, data = null, refetch }) => {
               <div className="flex justify-center mt-5">
                 <Button
                   type="submit"
+                  className="bg-gradient-to-r from-blue-600 to-green-600"
                   sx={{
-                    background: "linear-gradient(45deg, #B5179E, #7209B7)",
+                    // background: "linear-gradient(45deg, #B5179E, #7209B7)",
                     color: "white",
                     fontWeight: "bold",
                     borderRadius: "999px",
